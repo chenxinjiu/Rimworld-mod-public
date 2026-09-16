@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net481</TargetFramework>
+    <TargetFramework>net48</TargetFramework>
     <LangVersion>9.0</LangVersion>
     <AssemblyName>HelldiversRim</AssemblyName>
     <RootNamespace>HelldiversRim</RootNamespace>
@@ -11,17 +11,23 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
 
-    <!-- RimWorld 安装路径：你的 Steam 库在 E:\steam，游戏在 E:\steam\steamapps\common\RimWorld。
-         换成别的机器，改这里一行即可，或编译时用 /p:RimWorldPath= 覆盖。 -->
+  <PropertyGroup>
+    <!--
+      改成引用本机游戏目录里的 Managed dll，不再用 NuGet 的 Krafs.Rimworld.Ref 1.5 包（与 1.6 不匹配）。
+      RimWorld 默认装在 Steam 公共库。可命令行覆盖：
+        dotnet build -p:RimWorldPath="E:\Other\SteamLibrary\..."
+
+      如果继续用 <RimWorldPath>xxx</RimWorldPath> 写死在 csproj 里，
+      请在下方改用你自己机器的真实路径。
+    -->
     <SteamInstall Condition="'$(SteamInstall)' == ''">E:\steam</SteamInstall>
     <RimWorldPath Condition="'$(RimWorldPath)' == ''">$(SteamInstall)\steamapps\common\RimWorld</RimWorldPath>
     <RimWorldManaged>$(RimWorldPath)\RimWorldWin64_Data\Managed</RimWorldManaged>
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- 直接引用游戏 Managed 目录下所有 dll（含 Assembly-CSharp、UnityEngine、0Harmony）。
-         这样不再依赖 NuGet 包。Private=false 表示不把这些 dll 拷进输出目录。 -->
     <Reference Include="$(RimWorldManaged)\*.dll">
       <Private>false</Private>
     </Reference>
