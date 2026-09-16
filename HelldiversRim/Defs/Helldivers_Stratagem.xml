@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ==================== 信标抛射物（无伤害，落地触发空投） ==================== -->
+  <ThingDef>
+    <defName>Helldivers_Proj_Stratagem</defName>
+    <label>beacon flare</label>
+    <thingClass>HelldiversRim.Projectile_Stratagem</thingClass>
+    <eType>Unknown</eType>
+    <alwaysHaulable>false</alwaysHaulable>
+    <neverHaulable>true</neverHaulable>
+    <projectile Class="ProjectileProperties">
+      <damageDef>Scratch</damageDef>
+      <damageAmountBase>0</damageAmountBase>
+      <speed>45</speed>
+    </projectile>
+    <graphicData>
+      <texPath>Things/Projectile/SonicImp</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <altitudeLayer>OnTop</altitudeLayer>
+    <drawGuiOverlay>false</drawGuiOverlay>
+  </ThingDef>
+
+  <!-- ==================== 战略配备信标（武器：瞄准后发射信标） ==================== -->
+  <ThingDef>
+    <defName>Helldivers_StratagemBeacon</defName>
+    <label>stratagem beacon</label>
+    <description>A marker beacon launcher. Fire it at a drop zone to call in a mortar sentry from Super Earth's orbit.</description>
+    <category>Item</category>
+    <thingClass>ThingWithComps</thingClass>
+    <eType>Weapon</eType>
+    <equippedStatOffsets />
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <MarketValue>150</MarketValue>
+      <Mass>1.5</Mass>
+    </statBases>
+    <verbs>
+      <li>
+        <verbClass>Verb_Shoot</verbClass>
+        <defaultProjectile>Helldivers_Proj_Stratagem</defaultProjectile>
+        <hasStandardCommand>true</hasStandardCommand>
+        <warmupTicks>8</warmupTicks>
+        <range>50</range>
+        <minRange>6</minRange>
+        <ticksBetweenShots>90</ticksBetweenShots>
+        <verbProps IsCombatWeapon="False">
+          <defaultLabel>call in mortar sentry</defaultLabel>
+          <targetParams>
+            <canTargetLocations>true</canTargetLocations>
+            <canTargetPawns>true</canTargetPawns>
+          </targetParams>
+        </verbProps>
+      </li>
+    </verbs>
+    <comps>
+      <li Class="HelldiversRim.CompProperties_StratagemBeacon">
+        <mortarSentryDef>Helldivers_MortarSentry</mortarSentryDef>
+        <podOpenDelay>60</podOpenDelay>
+      </li>
+    </comps>
+    <graphicData>
+      <texPath>Things/Item/Resource/Components/ComponentIndustrial</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawGUIOverlay>true</drawGUIOverlay>
+    </graphicData>
+    <altitudeLayer>Item</altitudeLayer>
+    <stackLimit>1</stackLimit>
+    <rotatable>false</rotatable>
+  </ThingDef>
+
+</Defs>

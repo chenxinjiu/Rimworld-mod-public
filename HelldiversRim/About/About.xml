@@ -7,6 +7,6 @@
     <li>1.4</li>
     <li>1.5</li>
   </supportedVersions>
-  <description>A RimWorld x Helldivers content mod. First milestone: Super-Earth themed consumables and items, written as pure XML so it's easy to extend.</description>
+  <description>A RimWorld x Helldivers content mod written as pure XML plus C#. Includes Super-Earth consumables (stim, ration bar, samples) and an orbital mortar sentry called in via the stratagem beacon.</description>
   <url>https://github.com/chenxinjiu/Rimworld-mod-public/tree/main/HelldiversRim</url>
 </MetaData>

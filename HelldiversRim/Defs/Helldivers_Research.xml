@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ResearchProjectDef>
+    <defName>Helldivers_OrbitalSentryTactics</defName>
+    <label>orbital sentry tactics</label>
+    <description>Establish a secure uplink with Super Earth command, allowing you to call in mortar sentries from orbit via the stratagem beacon.</description>
+    <canRequestAnyThing>true</canRequestAnyThing>
+    <techLevel>Industrial</techLevel>
+    <baseCost>1800</baseCost>
+    <unlockedDefs>
+      <li>Helldivers_StratagemBeacon</li>
+      <li>Helldivers_MortarSentry</li>
+    </unlockedDefs>
+  </ResearchProjectDef>
+
+</Defs>

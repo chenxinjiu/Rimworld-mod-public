@@ -1,0 +1,4 @@
+# build artifacts
+Source/bin/
+Source/obj/
+*.user

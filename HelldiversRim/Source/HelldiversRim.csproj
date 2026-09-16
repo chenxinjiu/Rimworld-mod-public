@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net481</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <AssemblyName>HelldiversRim</AssemblyName>
+    <RootNamespace>HelldiversRim</RootNamespace>
+    <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <Deterministic>false</Deterministic>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- RimWorld 程序集引用包；版本号对应游戏1.5系 -->
+    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.5.*" />
+  </ItemGroup>
+
+  <!-- 编译后把 dll 拷进 mod 的 Assemblies 目录 -->
+  <Target Name="CopyToModAssemblies" AfterTargets="Build">
+    <Copy SourceFiles="$(OutputPath)HelldiversRim.dll" DestinationFolder="$(MSBuildProjectDirectory)/../Assemblies" />
+  </Target>
+
+</Project>

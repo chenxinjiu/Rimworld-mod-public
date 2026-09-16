@@ -1,0 +1,2 @@
+# Build with `dotnet build` (see Source/HelldiversRim.csproj).
+# The compiled HelldiversRim.dll is copied into this folder automatically.

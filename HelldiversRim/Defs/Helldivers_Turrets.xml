@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ==================== 迫击炮弹（爆炸抛射物，非掉落物） ==================== -->
+  <ThingDef>
+    <defName>Helldivers_Proj_SentryMortarShell</defName>
+    <label>sentry mortar shell</label>
+    <thingClass>Projectile_Explosive</thingClass>
+    <eType>Unknown</eType>
+    <alwaysHaulable>false</alwaysHaulable>
+    <neverHaulable>true</neverHaulable>
+    <projectile Class="ProjectileProperties">
+      <damageDef>Explosion</damageDef>
+      <damageAmountBase>30</damageAmountBase>
+      <explosionRadius>4.5</explosionRadius>
+      <speed>30</speed>
+    </projectile>
+    <graphicData>
+      <texPath>Things/Projectile/MortarShell</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+    </graphicData>
+    <altitudeLayer>OnTop</altitudeLayer>
+    <drawGuiOverlay>false</drawGuiOverlay>
+  </ThingDef>
+
+  <!-- ==================== 哨戒炮管（决定射击参数） ==================== -->
+  <ThingDef>
+    <defName>Helldivers_Gun_SentryMortar</defName>
+    <label>sentry mortar tube</label>
+    <thingClass>ThingWithComps</thingClass>
+    <eType>Item</eType>
+    <verbs>
+      <li>
+        <verbClass>Verb_ShootManualLongRange</verbClass>
+        <hasStandardCommand>false</hasStandardCommand>
+        <warmupTicks>20</warmupTicks>
+        <range>48</range>
+        <defaultProjectile>Helldivers_Proj_SentryMortarShell</defaultProjectile>
+        <verbProps IsCombatWeapon="True">
+          <defaultLabel>sentry mortars</defaultLabel>
+          <targetParams>
+            <canTargetLocations>true</canTargetLocations>
+            <canTargetPawns>true</canTargetPawns>
+          </targetParams>
+        </verbProps>
+      </li>
+    </verbs>
+    <graphicData>
+      <texPath>Things/Weapon_Ranged/BasicCannon</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <altitudeLayer>Item</altitudeLayer>
+  </ThingDef>
+
+  <!-- ==================== 迫击炮哨戒（自动炮塔建筑） ==================== -->
+  <ThingDef ParentName="BaseTurretGun">
+    <defName>Helldivers_MortarSentry</defName>
+    <label>mortar sentry</label>
+    <description>An auto-targeting mortar turret called in from Super Earth. Lobs explosive shells at distant enemies. Needs power.</description>
+    <statBases>
+      <MaxHitPoints>320</MaxHitPoints>
+      <MarketValue>2200</MarketValue>
+    </statBases>
+    <building>
+      <ai_combat>true</ai_combat>
+      <turretGunDef>Helldivers_Gun_SentryMortar</turretGunDef>
+      <turretId>HelldiversMortarSentry</turretId>
+      <range>48</range>
+      <shotSweepPieces>2</shotSweepPieces>
+    </building>
+    <comps>
+      <li Class="CompPowerTrader">
+        <powerConsumption>150</powerConsumption>
+      </li>
+      <li Class="CompToggleableOverlay"/>
+    </comps>
+    <costList>
+      <Steel>120</Steel>
+      <ComponentIndustrial>3</ComponentIndustrial>
+    </costList>
+  </ThingDef>
+
+</Defs>
