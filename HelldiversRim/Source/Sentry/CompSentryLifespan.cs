@@ -38,7 +38,7 @@ namespace HelldiversRim
         private int shellsRemaining = -1;
         private bool done;
 
-        /// <summary>由 Verb_SentryMortar 每发射一发调用。</summary>
+        /// <summary>由 Verb_SentryMortar 每发射一发调用（仅非 CE 路径会走到这里）。</summary>
         public void ShotFired()
         {
             if (done)
@@ -49,6 +49,24 @@ namespace HelldiversRim
 
             shellsRemaining--;
             if (shellsRemaining <= 0)
+                SelfDestruct();
+        }
+
+        /// <summary>
+        /// CE 路径：CE 下开火由 CE 弹药系统驱动，射击动词不会触发，因此改为轮询
+        /// CE 弹药余量，弹尽即自毁。非 CE 时此分支直接跳过。
+        /// </summary>
+        public override void CompTick()
+        {
+            if (done || !CECompat.IsActive)
+                return;
+
+            // 节流：每隔 ~0.25s 才查一次，避免每 tick 反射。
+            if ((Find.TickManager.TicksGame & 15) != 0)
+                return;
+
+            int? ammo = CECompat.AmmoRemaining(parent);
+            if (ammo.HasValue && ammo.Value <= 0)
                 SelfDestruct();
         }
 
