@@ -20,7 +20,7 @@
         <turretDef>Helldivers_MortarSentry</turretDef>
         <pillarDef>Helldivers_BeaconPillar</pillarDef>
         <silverCost>500</silverCost>
-        <researchRequired>Helldivers_CommsUplink</researchRequired>
+        <researchRequired>Helldivers_OrbitalSentryTactics</researchRequired>
       </li>
       <li Class="CompPowerTrader">
         <powerConsumption>50</powerConsumption>
@@ -40,17 +40,5 @@
       <li>PlaceWorker_NoStructuresAdjacent</li>
     </placeWorkers>
   </ThingDef>
-
-  <!-- ==================== 解锁研究：战备呼叫 ==================== -->
-  <ResearchProjectDef>
-    <defName>Helldivers_CommsUplink</defName>
-    <label>Helldivers comms uplink</label>
-    <description>Establish a secure uplink with Super Earth command so the Helldivers comms terminal can call in sentry turrets from orbit for a price in silver.</description>
-    <techLevel>Industrial</techLevel>
-    <baseCost>1400</baseCost>
-    <unlockedDefs>
-      <li>Helldivers_CommsConsole</li>
-    </unlockedDefs>
-  </ResearchProjectDef>
 
 </Defs>

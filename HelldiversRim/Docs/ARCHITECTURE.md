@@ -28,7 +28,7 @@ Super-Earth（绝地潜兵）风格的内容mod，计划包含：
 | 统一呼叫入口 | `HelldiversCommsUtility.CallInTurret`：通讯终端/信标共用 | ✅ |
 | 通讯终端呼叫 | `Helldivers_CommsConsole` + 白银扣费 + 落点瞄准 | ✅ |
 | 固定盟友派系 | Super Earth(`Helldivers_SuperEarth`) + 开局强制结盟 | ✅ |
-| 科技解锁 | `Helldivers_CommsUplink` 门控呼叫 | ✅ |
+| 科技解锁 | `Helldivers_OrbitalSentryTactics` 门控呼叫 | ✅ |
 | SOS2 空投框架 | `SOS2Compat` 软依赖适配 + 轨道空投入口 | 🚧 框架已搭，API待实机核 |
 | CE 兼容 | PatchOperationFindMod 门控 + C# 反射软依赖(CECompat) | ⚠️ 起点版，需实机验证 |
 
@@ -94,7 +94,7 @@ Turret 配置（每座炮台一组）：
   消耗品、一次性迫击炮、信标+蓝光柱、CE 补丁框架、软依赖适配层。
 
 - **Phase 1 —— 通讯终端呼叫 + 派系 + 解锁（已完成）**
-  通讯终端界面挂"呼叫战备"命令、白银扣费、统一 `CallIn` 入口；新建固定盟友派系 Super Earth + 科技解锁 `Helldivers_CommsUplink`。
+  通讯终端界面挂"呼叫战备"命令、白银扣费、统一 `CallIn` 入口；新建固定盟友派系 Super Earth + 科技解锁 `Helldivers_OrbitalSentryTactics`。
 
 - **Phase 2 —— 升级模块**
   通讯终端升级各炮台弹药量/血量（暂缓，见 §3.3）。
@@ -132,7 +132,7 @@ Turret 配置（每座炮台一组）：
 ### B. 本机编译 + 实机验证（你来做，反馈给我）
 - [ ] `cd HelldiversRim/Source && dotnet build`（产物自动拷入 `Assemblies/`）。
 - [ ] 炮塔：空投落地→索敌开火→弹尽自毁分解是否正常。
-- [ ] 通讯终端：研究 `Helldivers_CommsUplink` 后呼叫、白银扣费、落点瞄准是否正常。
+- [ ] 通讯终端：研究 `Helldivers_OrbitalSentryTactics` 后呼叫、白银扣费、落点瞄准是否正常。
 - [ ] 派系：开局 Super Earth 是否出现且为盟友。
 - [ ] 蓝色光柱 Mote：`color`/`CompGlower` 是否按 1.5 正确解析（报错贴我）。
 
