@@ -26,7 +26,7 @@ namespace HelldiversRim
 
             Thing turret = ThingMaker.MakeThing(turretDef);
 
-            ActiveDropPodInfo info = new ActiveDropPodInfo
+            DropPodInfo info = new DropPodInfo
             {
                 SingleContainedThing = turret,
                 openDelay = openDelay

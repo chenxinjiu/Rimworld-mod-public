@@ -29,7 +29,7 @@ namespace HelldiversRim
             Faction faction = Find.World.factionManager.AllFactions.FirstOrDefault(f => f.def == def);
             if (faction == null)
             {
-                faction = FactionGenerator.NewGeneratedFaction(def);
+                faction = FactionGenerator.NewGeneratedFaction(new FactionGeneratorParms(def));
                 if (faction == null)
                     return;
                 Find.World.factionManager.Add(faction);

@@ -71,14 +71,12 @@ namespace HelldiversRim
                 canTargetLocations = true,
                 canTargetPawns = false,
                 canTargetBuildings = true,
-                validator = (LocalTargetInfo t) => t.Cell.InBounds(Map)
+                validator = (TargetInfo t) => t.Cell.InBounds(Map)
             };
 
             Find.Targeter.BeginTargeting(
                 targetParams,
-                OnTargetSelected,
-                null,
-                () => "选择空投落点");
+                OnTargetSelected);
         }
 
         private void OnTargetSelected(LocalTargetInfo target)

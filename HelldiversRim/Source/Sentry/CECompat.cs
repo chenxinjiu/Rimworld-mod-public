@@ -32,7 +32,11 @@ namespace HelldiversRim
             if (!IsActive)
                 return null;
 
-            ThingComp ceComp = parent.AllComps.FirstOrDefault(c =>
+            ThingWithComps twc = parent as ThingWithComps;
+            if (twc == null)
+                return null;
+
+            ThingComp ceComp = twc.AllComps.FirstOrDefault(c =>
                 c.GetType().Namespace != null && c.GetType().Namespace.StartsWith("CombatExtended"));
             if (ceComp == null)
                 return null;
