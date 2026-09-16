@@ -46,7 +46,7 @@
           <xpath>Defs/ThingDef[defName='Helldivers_MortarSentry']/comps</xpath>
           <value>
             <li Class="CombatExtended.CompProperties_AmmoUser">
-              <ammoSet>CE_Autocannon_Round</ammoSet>
+              <ammoSet>AmmoSet_MortarGrenade</ammoSet>
             </li>
           </value>
         </li>

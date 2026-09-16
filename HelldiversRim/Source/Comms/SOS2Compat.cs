@@ -1,4 +1,7 @@
+using System;
+using System.Collections.Generic;
 using RimWorld;
+using RimWorld.Planet;
 using Verse;
 
 namespace HelldiversRim
@@ -7,17 +10,21 @@ namespace HelldiversRim
     /// SOS2（Save Our Ship 2）软依赖适配层。与 CECompat 同思路：运行时用 ModsConfig
     /// 判断是否安装，避免编译期硬引用 SOS2 程序集——dll 在有没有 SOS2 的机器上都能加载。
     ///
-    /// 设计目标（来自 ARCHITECTURE.md Phase 3）：
-    /// 装了 SOS2 时，玩家若拥有一艘在轨飞船，可从飞船向星球空投炮台；否则/未装 SOS2
-    /// 则回落到通讯终端呼叫。
+    /// 设计目标：装了 SOS2 时，玩家若拥有一艘在轨飞船，可从飞船（大概率靠"轨道空投"）
+    /// 向星球呼叫炮台；未装 SOS2 或无在轨飞船时，回落通讯终端 / 便携呼叫器路径。
     ///
-    /// ⚠️ SOS2 的"玩家在轨飞船"具体类型/成员会随版本变化，PlayerHasOrbitalShip 目前是
-    /// 待补的判定点（留 TODO）。实机测试后按 SOS2 实际 API 补上即可。
+    /// 检测"在轨飞船"无需反射 SOS2 私有类型：SOS2 会把玩家发射进轨道的飞船注册为一个
+    /// 世界对象（WorldObjectDef defName=ShipOrbiting，类 SaveOurShip2.WorldObjectOrbitingShip，
+    /// canBePlayerHome=true）。这里只用 RimWorld 标准 API 遍历世界对象 + 玩家派系判断，
+    /// 对 SOS2 版本相对稳健。
     /// </summary>
     public static class SOS2Compat
     {
-        /// <summary>SOS2 的 packageId（实测时确认）。</summary>
-        public const string PackageId = "kentington.SaveOurShip2";
+        /// <summary>SOS2 的 packageId。</summary>
+        public const string PackageId = "kentington.saveourship2";
+
+        /// <summary>SOS2 中"在轨飞船"的世界对象 defName（见 Defs/WorldObjectDefs/WorldObjects.xml）。</summary>
+        private const string OrbitalShipDefName = "ShipOrbiting";
 
         private static readonly bool? active;
 
@@ -39,18 +46,30 @@ namespace HelldiversRim
         }
 
         /// <summary>
-        /// 玩家阵营是否拥有一艘在轨飞船（SOS2）。
-        /// 判定点：定位 SOS2 中"玩家在轨飞船/舰队"的组件或字段。
-        /// 未实现时返回 null（安全降级 → 呼叫回落到通讯终端路径，不崩）。
+        /// 玩家阵营是否拥有一艘在轨飞船（SOS2）。三态：
+        ///   null → 未安装 SOS2（主调方应走"无轨道支援"的回落路径）；
+        ///   true → 已确认有玩家在轨飞船（可走轨道呼叫）；
+        ///   false→ 装了 SOS2 但没有玩家在轨飞船。
         /// </summary>
         public static bool? PlayerHasOrbitalShip()
         {
             if (!IsActive)
                 return null;
 
-            // TODO(SOS2 API)：SOS2 中玩家在轨飞船通常由 SOS2 的
-            //   worldComponents 或飞船舰队逻辑托管。确认实际类型/字段后在此返回 true/false。
-            // 当前默认 false，保证先走通讯终端路径、不触发 SOS2 专有代码。
+            List<WorldObject> objs = Find.WorldObjects.AllWorldObjects;
+            for (int i = 0; i < objs.Count; i++)
+            {
+                WorldObject wo = objs[i];
+                if (wo == null || wo.def == null || wo.Faction == null)
+                    continue;
+
+                if (string.Equals(wo.def.defName, OrbitalShipDefName, StringComparison.Ordinal)
+                    && wo.Faction == Faction.OfPlayer)
+                {
+                    return true;
+                }
+            }
+
             return false;
         }
     }

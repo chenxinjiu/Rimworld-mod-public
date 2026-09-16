@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-  <!-- ==================== 落点蓝色光柱（信标动画，Mote） ==================== -->
+  <!-- ==================== 落点蓝色光柱（呼叫动画，Mote） ==================== -->
   <ThingDef>
     <defName>Helldivers_BeaconPillar</defName>
     <thingClass>Mote</thingClass>
@@ -32,61 +32,27 @@
     </mote>
   </ThingDef>
 
-  <!-- ==================== 信标抛射物（无伤害，落地触发空投） ==================== -->
-  <ThingDef>
-    <defName>Helldivers_Proj_Stratagem</defName>
-    <label>beacon flare</label>
-    <thingClass>HelldiversRim.Projectile_Stratagem</thingClass>
-    <eType>Unknown</eType>
-    <alwaysHaulable>false</alwaysHaulable>
-    <neverHaulable>true</neverHaulable>
-    <projectile Class="ProjectileProperties">
-      <damageDef>Scratch</damageDef>
-      <damageAmountBase>0</damageAmountBase>
-      <speed>45</speed>
-    </projectile>
-    <graphicData>
-      <texPath>Things/Projectile/SonicImp</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-    </graphicData>
-    <altitudeLayer>OnTop</altitudeLayer>
-    <drawGuiOverlay>false</drawGuiOverlay>
-  </ThingDef>
-
-  <!-- ==================== 战略配备信标（武器：瞄准后发射信标） ==================== -->
+  <!-- ==================== 便携呼叫器（持续型副手装备） ==================== -->
+  <!--
+    携带者获得"呼叫战备"Gizmo，可随时选点空投哨戒炮塔；不消耗、不与主武器冲突
+    （equipmentType=Secondary 占副手槽）。呼叫逻辑见 CompStratagemCaller。
+  -->
   <ThingDef>
     <defName>Helldivers_StratagemBeacon</defName>
-    <label>stratagem beacon</label>
-    <description>A marker beacon launcher. Fire it at a drop zone to call in a mortar sentry from Super Earth's orbit.</description>
+    <label>stratagem caller</label>
+    <description>A handheld stratagem uplink. Equip it in your off-hand and call in a mortar sentry from orbit at any marked drop zone; it never runs out.</description>
     <category>Item</category>
     <thingClass>ThingWithComps</thingClass>
     <eType>Weapon</eType>
+    <equipmentType>Secondary</equipmentType>
     <equippedStatOffsets />
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
-      <MarketValue>150</MarketValue>
+      <MarketValue>300</MarketValue>
       <Mass>1.5</Mass>
     </statBases>
-    <verbs>
-      <li>
-        <verbClass>Verb_Shoot</verbClass>
-        <defaultProjectile>Helldivers_Proj_Stratagem</defaultProjectile>
-        <hasStandardCommand>true</hasStandardCommand>
-        <warmupTicks>8</warmupTicks>
-        <range>50</range>
-        <minRange>6</minRange>
-        <ticksBetweenShots>90</ticksBetweenShots>
-        <verbProps IsCombatWeapon="False">
-          <defaultLabel>call in mortar sentry</defaultLabel>
-          <targetParams>
-            <canTargetLocations>true</canTargetLocations>
-            <canTargetPawns>true</canTargetPawns>
-          </targetParams>
-        </verbProps>
-      </li>
-    </verbs>
     <comps>
-      <li Class="HelldiversRim.CompProperties_StratagemBeacon">
+      <li Class="HelldiversRim.CompProperties_StratagemCaller">
         <mortarSentryDef>Helldivers_MortarSentry</mortarSentryDef>
         <podOpenDelay>60</podOpenDelay>
         <beaconPillarDef>Helldivers_BeaconPillar</beaconPillarDef>

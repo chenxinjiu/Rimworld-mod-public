@@ -46,7 +46,7 @@ namespace HelldiversRim
                 BindingFlags.Public | BindingFlags.NonPublic |
                 BindingFlags.Instance | BindingFlags.IgnoreCase;
 
-            foreach (string candidate in new[] { "AmmoRemaining", "MagAmmoCount", "AmmoCount", "RemainingAmmo" })
+            foreach (string candidate in new[] { "CurMag", "MagAmmoCount", "AmmoCount" })
             {
                 PropertyInfo pi = t.GetProperty(candidate, flags);
                 if (pi != null && pi.PropertyType == typeof(int))
