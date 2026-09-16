@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ==================== Stim（治疗针） ==================== -->
+  <ThingDef>
+    <defName>Helldivers_Stim</defName>
+    <label>stim</label>
+    <description>A single-use Helldiver combat stim. One press of the trigger and you're back on your feet, fighting fit again.</description>
+    <category>Item</category>
+    <thingClass>Thing_Medicine</thingClass>
+    <eType>Item</eType>
+    <healthAffectsPrice>false</healthAffectsPrice>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <MarketValue>45</MarketValue>
+    </statBases>
+    <graphicData>
+      <texPath>Things/Item/Resource/Pharmaceuticals/Medicine/MedicineIndustrial</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawGUIOverlay>true</drawGUIOverlay>
+    </graphicData>
+    <altitudeLayer>Item</altitudeLayer>
+    <stackLimit>1</stackLimit>
+    <rotatable>false</rotatable>
+    <medicineCategory>Medicine</medicineCategory>
+    <tendingPriority>5</tendingPriority>
+  </ThingDef>
+
+  <!-- ==================== Ration Bar（补给口粮） ==================== -->
+  <ThingDef>
+    <defName>Helldivers_RationBar</defName>
+    <label>ration bar</label>
+    <description>A compact, high-energy survival bar issued to every Helldiver. Tastes like pure liberty.</description>
+    <category>Item</category>
+    <thingClass>Thing_Ingestible</thingClass>
+    <eType>Item</eType>
+    <statBases>
+      <MaxHitPoints>70</MaxHitPoints>
+      <MarketValue>14</MarketValue>
+    </statBases>
+    <graphicData>
+      <texPath>Things/Item/Resource/Meal/MealSurvivalPack</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawGUIOverlay>true</drawGUIOverlay>
+    </graphicData>
+    <altitudeLayer>Item</altitudeLayer>
+    <stackLimit>20</stackLimit>
+    <rotatable>false</rotatable>
+    <ingestible>
+      <foodTypeFlags>Meal</foodTypeFlags>
+      <nutrition>0.45</nutrition>
+      <tasteThought>Thought_HadMealSurvival</tasteThought>
+      <maxNumToIngestAtOnce>8</maxNumToIngestAtOnce>
+    </ingestible>
+  </ThingDef>
+
+  <!-- ==================== Sample（勘测样本资源） ==================== -->
+  <ThingDef>
+    <defName>Helldivers_Sample</defName>
+    <label>prospected sample</label>
+    <description>A classified biological sample, valuable for future Super-Earth research projects. Collect them from the wilds.</description>
+    <category>Item</category>
+    <thingClass>Thing_Resource</thingClass>
+    <eType>Item</eType>
+    <countAsResource>true</countAsResource>
+    <resourceReadoutPriority>Middle</resourceReadoutPriority>
+    <statBases>
+      <MaxHitPoints>100</MaxHitPoints>
+      <MarketValue>80</MarketValue>
+      <Mass>0.2</Mass>
+    </statBases>
+    <graphicData>
+      <texPath>Things/Item/Resource/Steel/Steel</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawGUIOverlay>true</drawGUIOverlay>
+    </graphicData>
+    <altitudeLayer>Item</altitudeLayer>
+    <stackLimit>75</stackLimit>
+    <rotatable>false</rotatable>
+    <thingCategories>
+      <li>Items</li>
+    </thingCategories>
+    <storeCategories>
+      <li>ResourcesRaw</li>
+    </storeCategories>
+  </ThingDef>
+
+</Defs>
