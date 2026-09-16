@@ -10,8 +10,8 @@
     <alwaysHaulable>false</alwaysHaulable>
     <neverHaulable>true</neverHaulable>
     <projectile Class="ProjectileProperties">
-      <damageDef>Explosion</damageDef>
-      <damageAmountBase>30</damageAmountBase>
+      <damageDef>Bomb</damageDef>
+      <damageAmountBase>60</damageAmountBase>
       <explosionRadius>4.5</explosionRadius>
       <speed>30</speed>
     </projectile>
@@ -37,7 +37,8 @@
         <warmupTicks>20</warmupTicks>
         <ticksBetweenBurstShots>107</ticksBetweenBurstShots>
         <burstShotCount>1</burstShotCount>
-        <range>48</range>
+        <range>64</range>
+        <minRange>8</minRange>
         <defaultProjectile>Helldivers_Proj_SentryMortarShell</defaultProjectile>
         <verbProps IsCombatWeapon="True">
           <defaultLabel>sentry mortars</defaultLabel>
@@ -69,9 +70,16 @@
       <ai_combat>true</ai_combat>
       <turretGunDef>Helldivers_Gun_SentryMortar</turretGunDef>
       <turretId>HelldiversMortarSentry</turretId>
-      <range>48</range>
+      <range>64</range>
+      <minRange>8</minRange>
       <shotSweepPieces>2</shotSweepPieces>
     </building>
+    <graphicData>
+      <texPath>Things/Buildings/Helldivers/MortarSentry</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+      <drawSize>2</drawSize>
+    </graphicData>
     <comps>
       <!-- 不再需要电网：一次性自带弹药 -->
       <li Class="HelldiversRim.CompProperties_SentryLifespan">
@@ -84,8 +92,8 @@
       <li Class="CompToggleableOverlay"/>
     </comps>
     <costList>
-      <Steel>120</Steel>
-      <ComponentIndustrial>2</ComponentIndustrial>
+      <Steel>80</Steel>
+      <ComponentIndustrial>1</ComponentIndustrial>
     </costList>
   </ThingDef>
 

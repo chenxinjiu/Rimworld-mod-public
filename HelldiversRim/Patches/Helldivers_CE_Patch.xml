@@ -72,7 +72,7 @@
           <neverHaulable>true</neverHaulable>
           <projectile Class="ProjectilePropertiesCE">
             <damageDef>Bomb</damageDef>
-            <damageAmountBase>30</damageAmountBase>
+            <damageAmountBase>60</damageAmountBase>
             <explosionRadius>4.5</explosionRadius>
             <pelletCount>1</pelletCount>
             <speed>30</speed>

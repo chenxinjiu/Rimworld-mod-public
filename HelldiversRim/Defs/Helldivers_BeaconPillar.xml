@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ==================== 蓝色战略配备光柱（呼叫落点视觉） ====================
+       附着到信标抛射物命中点，竖立一根白蓝高亮光柱，标示空投落点。
+       贴图来源：绝地潜兵2 蓝色光柱参考图（已缩放/重绘）。 -->
+  <MoteDef>
+    <defName>Helldivers_BeaconPillar</defName>
+    <thingClass>Mote</thingClass>
+    <graphicData>
+      <texPath>Motes/Helldivers_BeaconPillar</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>TransparentPostLight</shaderType>
+      <drawSize>2.2</drawSize>
+      <color>(0.55, 0.78, 1.0, 0.85)</color>
+    </graphicData>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.3</fadeInTime>
+    <solidTime>7.0</solidTime>
+    <fadeOutTime>0.5</fadeOutTime>
+    <lifespan>7.8</lifespan>
+  </MoteDef>
+
+</Defs>

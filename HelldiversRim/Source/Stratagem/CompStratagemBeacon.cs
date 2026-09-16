@@ -36,6 +36,8 @@ namespace HelldiversRim
                 return;
             }
 
+            SpawnBeaconPillar(cell, map);
+
             Thing turret = ThingMaker.MakeThing(mortarDef);
 
             ActiveDropPodInfo info = new ActiveDropPodInfo
@@ -45,6 +47,18 @@ namespace HelldiversRim
             };
 
             DropPodUtility.MakeDropPodAt(cell, map, info);
+        }
+
+        /// <summary>在落点竖立蓝色光柱作为呼叫视觉反馈。</summary>
+        private void SpawnBeaconPillar(IntVec3 cell, Map map)
+        {
+            MoteDef pillarDef = DefDatabase<MoteDef>.GetNamedSilentFail("Helldivers_BeaconPillar");
+            if (pillarDef == null)
+                return;
+
+            Mote mote = (Mote)ThingMaker.MakeThing(pillarDef);
+            mote.Scale = 1f;
+            GenSpawn.Spawn(mote, cell, map);
         }
     }
 }
