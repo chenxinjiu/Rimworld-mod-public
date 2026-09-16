@@ -2,3 +2,8 @@
 Source/bin/
 Source/obj/
 *.user
+
+# 编译出的 mod 程序集不入库：本机坚持产物即可供 自玩/发给朋友/上传创意工坊 使用
+# 保留 Assemblies/.gitkeep 作为目录占位
+Assemblies/*.dll
+Assemblies/*.pdb
