@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ==================== Super Earth 固定盟友派系 ====================
+       canMakeRandomly=false：不会被世界随机生成，由
+       WorldComponent_HelldiversFaction 在开局显式创建并固定为玩家盟友。
+       不参与袭击/围城，仅作为"战备呼叫"的盟友背景与未来文案载体。 -->
+  <FactionDef>
+    <defName>Helldivers_SuperEarth</defName>
+    <label>Super Earth</label>
+    <description>Super Earth's orbital command, keeping the frontier safe in the name of managed democracy.</description>
+
+    <pawnSingular>Helldiver</pawnSingular>
+    <pawnSingularDefinite>the Helldiver</pawnSingularDefinite>
+    <pawnPlural>Helldivers</pawnPlural>
+    <pawnPluralDefinite>the Helldivers</pawnPluralDefinite>
+
+    <isPlayer>false</isPlayer>
+    <humanlikemembers>true</humanlikemembers>
+    <canMakeRandomly>false</canMakeRandomly>
+    <canBeTrader>true</canBeTrader>
+
+    <!-- 固定为友好 -->
+    <permanentEnemy>false</permanentEnemy>
+    <mustStartOneEnemy>false</mustStartOneEnemy>
+    <naturalColonyGoodwill>100</naturalColonyGoodwill>
+    <naturalColonyGoodwillMin>100</naturalColonyGoodwillMin>
+    <enemyReelectChance>0</enemyReelectChance>
+
+    <!-- 不主动进攻 -->
+    <canSiege>false</canSiege>
+    <canStageAttacks>false</canStageAttacks>
+    <canStealFromPlayer>false</canStealFromPlayer>
+
+    <techLevel>Spacer</techLevel>
+    <leaderTitle>SE Command</leaderTitle>
+    <listensToMusic>false</listensToMusic>
+    <pawnGendersKnown>true</pawnGendersKnown>
+
+    <colorSpectrum>
+      <li>(0.10, 0.42, 0.92)</li>
+    </colorSpectrum>
+  </FactionDef>
+
+</Defs>
