@@ -12,8 +12,9 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
 
-    <!-- RimWorld 安装路径：默认 Steam 默认路径，可通过命令行 /p:RimWorldPath= 覆盖 -->
-    <SteamInstall Condition="'$(SteamInstall)' == ''">C:\Program Files (x86)\Steam</SteamInstall>
+    <!-- RimWorld 安装路径：你的 Steam 在 E:\steam，游戏在 E:\steam\steamapps\common\RimWorld。
+         如需换机器，改这里一行即可，或命令行 /p:RimWorldPath= 覆盖 -->
+    <SteamInstall Condition="'$(SteamInstall)' == ''">E:\steam</SteamInstall>
     <RimWorldPath Condition="'$(RimWorldPath)' == ''">$(SteamInstall)\steamapps\common\RimWorld</RimWorldPath>
     <RimWorldManaged>$(RimWorldPath)\RimWorldWin64_Data\Managed</RimWorldManaged>
   </PropertyGroup>
