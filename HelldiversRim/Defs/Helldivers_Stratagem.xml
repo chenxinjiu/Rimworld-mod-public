@@ -57,7 +57,7 @@
     <comps>
       <li Class="HelldiversRim.CompProperties_StratagemBeacon">
         <mortarSentryDef>Helldivers_MortarSentry</mortarSentryDef>
-        <podOpenDelay>60</podOpenDelay>
+        <podOpenDelay>465</podOpenDelay>
       </li>
     </comps>
     <graphicData>

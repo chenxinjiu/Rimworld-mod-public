@@ -10,7 +10,7 @@ namespace HelldiversRim
     public class CompProperties_StratagemBeacon : CompProperties
     {
         public ThingDef mortarSentryDef;
-        public int podOpenDelay = 60;
+        public int podOpenDelay = 465;
 
         public CompProperties_StratagemBeacon()
         {

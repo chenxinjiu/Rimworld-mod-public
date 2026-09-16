@@ -35,6 +35,8 @@
         <verbClass>HelldiversRim.Verb_SentryMortar</verbClass>
         <hasStandardCommand>false</hasStandardCommand>
         <warmupTicks>20</warmupTicks>
+        <ticksBetweenBurstShots>107</ticksBetweenBurstShots>
+        <burstShotCount>1</burstShotCount>
         <range>48</range>
         <defaultProjectile>Helldivers_Proj_SentryMortarShell</defaultProjectile>
         <verbProps IsCombatWeapon="True">
@@ -60,7 +62,7 @@
     <label>mortar sentry</label>
     <description>A one-shot auto-targeting mortar turret dropped from Super Earth. It carries its own internal ammunition; once spent, it self-destructs into scrap.</description>
     <statBases>
-      <MaxHitPoints>220</MaxHitPoints>
+      <MaxHitPoints>400</MaxHitPoints>
       <MarketValue>1600</MarketValue>
     </statBases>
     <building>
@@ -73,7 +75,7 @@
     <comps>
       <!-- 不再需要电网：一次性自带弹药 -->
       <li Class="HelldiversRim.CompProperties_SentryLifespan">
-        <shots>18</shots>
+        <shots>36</shots>
         <explodeRadius>2.8</explodeRadius>
         <explodeDamage>30</explodeDamage>
         <scrapDef>Steel</scrapDef>
