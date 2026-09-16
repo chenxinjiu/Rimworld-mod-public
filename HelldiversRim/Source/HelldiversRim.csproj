@@ -22,8 +22,7 @@
   <ItemGroup>
     <!-- 直接引用游戏 Managed 目录下所有 dll（含 Assembly-CSharp、UnityEngine、0Harmony）
          这样不再依赖 NuGet 包。Private=false 表示不把这些 dll 拷进输出目录。 -->
-    <RimWorldReferenceDll Include="$(RimWorldManaged)\*.dll" />
-    <Reference Include="$(RimWorldReferenceDll)">
+    <Reference Include="$(RimWorldManaged)\*.dll">
       <Private>false</Private>
     </Reference>
   </ItemGroup>
