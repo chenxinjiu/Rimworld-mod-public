@@ -8,9 +8,9 @@ namespace HelldiversRim
     /// </summary>
     public class Projectile_Stratagem : Projectile
     {
-        protected override void Impact(Thing hitThing)
+        protected override void Impact(Thing hitThing, bool blockedByShield = false)
         {
-            base.Impact(hitThing);
+            base.Impact(hitThing, blockedByShield);
 
             Thing launcher = Launcher;
             if (launcher is ThingWithComps twc)
