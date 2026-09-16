@@ -11,11 +11,20 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+
+    <!-- RimWorld 安装路径：你的 Steam 库在 E:\steam，游戏在 E:\steam\steamapps\common\RimWorld。
+         换成别的机器，改这里一行即可，或编译时用 /p:RimWorldPath= 覆盖。 -->
+    <SteamInstall Condition="'$(SteamInstall)' == ''">E:\steam</SteamInstall>
+    <RimWorldPath Condition="'$(RimWorldPath)' == ''">$(SteamInstall)\steamapps\common\RimWorld</RimWorldPath>
+    <RimWorldManaged>$(RimWorldPath)\RimWorldWin64_Data\Managed</RimWorldManaged>
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- RimWorld 程序集引用包；版本号对应游戏1.5系 -->
-    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.5.*" />
+    <!-- 直接引用游戏 Managed 目录下所有 dll（含 Assembly-CSharp、UnityEngine、0Harmony）。
+         这样不再依赖 NuGet 包。Private=false 表示不把这些 dll 拷进输出目录。 -->
+    <Reference Include="$(RimWorldManaged)\*.dll">
+      <Private>false</Private>
+    </Reference>
   </ItemGroup>
 
   <!-- 编译后把 dll 拷进 mod 的 Assemblies 目录 -->
