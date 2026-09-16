@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
+  <!-- ==================== 落点蓝色光柱（信标动画，Mote） ==================== -->
+  <ThingDef>
+    <defName>Helldivers_BeaconPillar</defName>
+    <thingClass>Mote</thingClass>
+    <category>Mote</category>
+    <graphicData>
+      <texPath>Things/Mote/OrbitalBeamTargeting</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>Cutout</shaderType>
+      <drawSize>(3,3)</drawSize>
+      <color>
+        <r>0.25</r>
+        <g>0.55</g>
+        <b>1</b>
+        <a>1</a>
+      </color>
+    </graphicData>
+    <altitudeLayer>AboveFloor</altitudeLayer>
+    <comps>
+      <li Class="CompGlower">
+        <glowRadius>4</glowRadius>
+        <overlightRadius>5</overlightRadius>
+      </li>
+    </comps>
+    <mote>
+      <fadeInTime>0.25</fadeInTime>
+      <solidTime>1.8</solidTime>
+      <fadeOutTime>0.4</fadeOutTime>
+    </mote>
+  </ThingDef>
+
   <!-- ==================== 信标抛射物（无伤害，落地触发空投） ==================== -->
   <ThingDef>
     <defName>Helldivers_Proj_Stratagem</defName>
@@ -58,6 +89,7 @@
       <li Class="HelldiversRim.CompProperties_StratagemBeacon">
         <mortarSentryDef>Helldivers_MortarSentry</mortarSentryDef>
         <podOpenDelay>60</podOpenDelay>
+        <beaconPillarDef>Helldivers_BeaconPillar</beaconPillarDef>
       </li>
     </comps>
     <graphicData>
