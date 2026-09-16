@@ -16,10 +16,12 @@ namespace HelldiversRim
         {
         }
 
-        public override void FinalizeInit()
+        public override void WorldComponentUpdate()
         {
-            base.FinalizeInit();
+            base.WorldComponentUpdate();
 
+            // 1.6 的 WorldComponent 已无 FinalizeInit，改用每帧调用的 WorldComponentUpdate；
+            // 逻辑保证幂等（已存在则不再重复创建/结盟）。
             FactionDef def = DefDatabase<FactionDef>.GetNamedSilentFail("Helldivers_SuperEarth");
             if (def == null)
                 return;
@@ -28,12 +30,17 @@ namespace HelldiversRim
             if (faction == null)
             {
                 faction = FactionGenerator.NewGeneratedFaction(def);
+                if (faction == null)
+                    return;
                 Find.World.factionManager.Add(faction);
             }
 
             Faction playerFaction = Faction.OfPlayer;
-            if (playerFaction != null && faction != null)
+            if (playerFaction != null
+                && faction.RelationWith(playerFaction).kind != FactionRelationKind.Ally)
+            {
                 faction.SetRelationDirect(playerFaction, FactionRelationKind.Ally);
+            }
         }
     }
 }
