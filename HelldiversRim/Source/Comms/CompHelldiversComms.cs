@@ -45,7 +45,8 @@ namespace HelldiversRim
             Command_Action cmd = new Command_Action
             {
                 defaultLabel = "呼叫战备：" + Props.turretDef.label,
-                defaultDesc = "花费 " + Props.silverCost + " 白银，在指定落点呼叫一座 " + Props.turretDef.label + "。",
+                defaultDesc = (SOS2Compat.IsActive ? "经由在轨飞船空投" : "花费 " + Props.silverCost + " 白银，")
+                    + "在指定落点呼叫一座 " + Props.turretDef.label + "。",
                 action = BeginCallIn
             };
 
@@ -85,6 +86,14 @@ namespace HelldiversRim
             Map map = Map;
             if (map == null)
                 return;
+
+            // SOS2：装有 SOS2 且确认在轨飞船时走轨道空投（框架；判定点留待实机核）。
+            bool? ship = SOS2Compat.PlayerHasOrbitalShip();
+            if (ship == true)
+            {
+                SOS2Compat.TryOrbitalDrop(target.Cell, map, Props.turretDef, Props.pillarDef);
+                return;
+            }
 
             if (!HelldiversCommsUtility.TrySpendSilver(map, Props.silverCost))
             {
