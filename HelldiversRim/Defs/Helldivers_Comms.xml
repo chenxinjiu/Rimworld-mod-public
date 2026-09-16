@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ==================== 通讯终端（战备呼叫，花白银） ==================== -->
+  <ThingDef>
+    <defName>Helldivers_CommsConsole</defName>
+    <label>Helldivers comms uplink</label>
+    <description>A comms terminal tuned to Super Earth command. Spend silver to call in a mortar sentry at a marked drop zone.</description>
+    <category>Building</category>
+    <thingClass>Building</thingClass>
+    <size>(2,2)</size>
+    <terrainAffordanceNeeded>Light</terrainAffordanceNeeded>
+    <preferExternalResources>false</preferExternalResources>
+    <statBases>
+      <MaxHitPoints>200</MaxHitPoints>
+      <MarketValue>800</MarketValue>
+    </statBases>
+    <comps>
+      <li Class="HelldiversRim.CompProperties_HelldiversComms">
+        <turretDef>Helldivers_MortarSentry</turretDef>
+        <pillarDef>Helldivers_BeaconPillar</pillarDef>
+        <silverCost>500</silverCost>
+        <researchRequired>Helldivers_CommsUplink</researchRequired>
+      </li>
+      <li Class="CompPowerTrader">
+        <powerConsumption>50</powerConsumption>
+      </li>
+    </comps>
+    <costList>
+      <Steel>100</Steel>
+      <ComponentIndustrial>2</ComponentIndustrial>
+    </costList>
+    <graphicData>
+      <texPath>Things/Building/Production/CommsConsole</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <drawGUIOverlay>false</drawGUIOverlay>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <placeWorkers>
+      <li>PlaceWorker_NoStructuresAdjacent</li>
+    </placeWorkers>
+  </ThingDef>
+
+  <!-- ==================== 解锁研究：战备呼叫 ==================== -->
+  <ResearchProjectDef>
+    <defName>Helldivers_CommsUplink</defName>
+    <label>Helldivers comms uplink</label>
+    <description>Establish a secure uplink with Super Earth command so the Helldivers comms terminal can call in sentry turrets from orbit for a price in silver.</description>
+    <techLevel>Industrial</techLevel>
+    <baseCost>1400</baseCost>
+    <unlockedDefs>
+      <li>Helldivers_CommsConsole</li>
+    </unlockedDefs>
+  </ResearchProjectDef>
+
+</Defs>
