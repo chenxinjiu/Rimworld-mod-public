@@ -32,7 +32,7 @@
     <eType>Item</eType>
     <verbs>
       <li>
-        <verbClass>Verb_ShootManualLongRange</verbClass>
+        <verbClass>HelldiversRim.Verb_SentryMortar</verbClass>
         <hasStandardCommand>false</hasStandardCommand>
         <warmupTicks>20</warmupTicks>
         <range>48</range>
@@ -53,14 +53,15 @@
     <altitudeLayer>Item</altitudeLayer>
   </ThingDef>
 
-  <!-- ==================== 迫击炮哨戒（自动炮塔建筑） ==================== -->
+  <!-- ==================== 迫击炮哨戒（一次性自动炮塔建筑） ====================
+       空投/建造即使用，不带电网；自带内部弹药，打空后自毁并分解为废料。 -->
   <ThingDef ParentName="BaseTurretGun">
     <defName>Helldivers_MortarSentry</defName>
     <label>mortar sentry</label>
-    <description>An auto-targeting mortar turret called in from Super Earth. Lobs explosive shells at distant enemies. Needs power.</description>
+    <description>A one-shot auto-targeting mortar turret dropped from Super Earth. It carries its own internal ammunition; once spent, it self-destructs into scrap.</description>
     <statBases>
-      <MaxHitPoints>320</MaxHitPoints>
-      <MarketValue>2200</MarketValue>
+      <MaxHitPoints>220</MaxHitPoints>
+      <MarketValue>1600</MarketValue>
     </statBases>
     <building>
       <ai_combat>true</ai_combat>
@@ -70,14 +71,19 @@
       <shotSweepPieces>2</shotSweepPieces>
     </building>
     <comps>
-      <li Class="CompPowerTrader">
-        <powerConsumption>150</powerConsumption>
+      <!-- 不再需要电网：一次性自带弹药 -->
+      <li Class="HelldiversRim.CompProperties_SentryLifespan">
+        <shots>18</shots>
+        <explodeRadius>2.8</explodeRadius>
+        <explodeDamage>30</explodeDamage>
+        <scrapDef>Steel</scrapDef>
+        <scrapCount>60</scrapCount>
       </li>
       <li Class="CompToggleableOverlay"/>
     </comps>
     <costList>
       <Steel>120</Steel>
-      <ComponentIndustrial>3</ComponentIndustrial>
+      <ComponentIndustrial>2</ComponentIndustrial>
     </costList>
   </ThingDef>
 

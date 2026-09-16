@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  2026-09 CE 兼容补丁（起点版）
+  ======================================================================
+  CE（Combat Extended）用自己的一套战斗体系：弹药（AmmoDef/AmmoSetDef）、
+  抛射物（ProjectileCE）、射击动词（Verb_ShootCE）。炮塔在 CE 下需要走它的
+  弹药系统。本补丁只在检测到 CE 时生效（PatchOperationFindMod 门控）。
+
+  ⚠️ 重要：CE 的桥接字段因 CE 版本不同会有差异，完整建桥需要你在装了 CE 的
+  实机里验证并按报错微调。下面给出标准写法，作为你继续工作的起点。
+
+  要做的事：
+  1) 把哨戒炮管 helldivers_Gun_SentryMortar 的 verbClass 换成 CE 的 Verb_ShootCE；
+  2) 把抛射物换成 CE 抛射物类，并补 CE 弹道参数（破甲/弹丸等）；
+  3) 给炮塔挂上 CE 的弹药系统 CompProperties_AmmoUser，并指定 CE 的弹药组
+     （AmmoSetDef）。
+  ======================================================================
+-->
+<Patch>
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Combat Extended</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+
+        <!-- 1) 炮管动词切换为 CE 射击动词 -->
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName='Helldivers_Gun_SentryMortar']/verbs/li/verbClass</xpath>
+          <value>
+            <verbClass>CombatExtended.Verb_ShootCE</verbClass>
+          </value>
+        </li>
+
+        <!-- 2) 炮管换用 CE 抛射物（需要你在 CE 里确认一个迫击炮弹抛射物 Def，
+             常见如 CE 自带的 MortarShellConcrete/Explosive 系列） -->
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName='Helldivers_Gun_SentryMortar']/verbs/li/defaultProjectile</xpath>
+          <value>
+            <defaultProjectile>Helldivers_Proj_CEMortarShell</defaultProjectile>
+          </value>
+        </li>
+
+        <!-- 3) 给炮塔挂 CE 弹药系统；ammoSet 值需填 CE 里存在的 AmmoSetDef 名 -->
+        <li Class="PatchOperationAdd">
+          <xpath>Defs/ThingDef[defName='Helldivers_MortarSentry']/comps</xpath>
+          <value>
+            <li Class="CombatExtended.CompProperties_AmmoUser">
+              <ammoSet>CE_Autocannon_Round</ammoSet>
+            </li>
+          </value>
+        </li>
+
+      </operations>
+    </match>
+  </Operation>
+
+  <!-- CE 专用迫击炮弹（仅 CE 生效）。pelletCount/armorPenetration 等为 CE 字段。 -->
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Combat Extended</li>
+    </mods>
+    <match Class="PatchOperationAdd">
+      <xpath>/Defs</xpath>
+      <value>
+        <ThingDef>
+          <defName>Helldivers_Proj_CEMortarShell</defName>
+          <label>ce sentry mortar shell</label>
+          <thingClass>ProjectileCE_Explosive</thingClass>
+          <eType>Unknown</eType>
+          <alwaysHaulable>false</alwaysHaulable>
+          <neverHaulable>true</neverHaulable>
+          <projectile Class="ProjectilePropertiesCE">
+            <damageDef>Bomb</damageDef>
+            <damageAmountBase>30</damageAmountBase>
+            <explosionRadius>4.5</explosionRadius>
+            <pelletCount>1</pelletCount>
+            <speed>30</speed>
+          </projectile>
+          <graphicData>
+            <texPath>Things/Projectile/MortarShell</texPath>
+            <graphicClass>Graphic_Single</graphicClass>
+          </graphicData>
+          <altitudeLayer>OnTop</altitudeLayer>
+        </ThingDef>
+      </value>
+    </match>
+  </Operation>
+</Patch>
