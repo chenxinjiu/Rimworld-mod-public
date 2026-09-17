@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <Helldivers_CallInLabel>Call in: {0}</Helldivers_CallInLabel>
+  <Helldivers_CommsDescOrbital>Call in a {0} via orbital drop.</Helldivers_CommsDescOrbital>
+  <Helldivers_CommsDescCost>Spend {0} silver to call in a {1} at the marked drop zone.</Helldivers_CommsDescCost>
+  <Helldivers_CallerDesc>Call in a {0} at the marked drop zone without consuming the device.</Helldivers_CallerDesc>
+  <Helldivers_ResearchRequired>Requires research: {0}</Helldivers_ResearchRequired>
+  <Helldivers_PowerRequired>Requires power</Helldivers_PowerRequired>
+  <Helldivers_SilverInsufficient>Not enough silver to call in support.</Helldivers_SilverInsufficient>
+  <Helldivers_Unknown>Unknown</Helldivers_Unknown>
+</LanguageData>
