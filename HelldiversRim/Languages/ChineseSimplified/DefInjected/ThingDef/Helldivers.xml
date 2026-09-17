@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <!-- 通讯终端 -->
+  <Helldivers_CommsConsole.label>超级地球通讯台</Helldivers_CommsConsole.label>
+  <Helldivers_CommsConsole.description>一座连接超级地球指挥部的通讯终端。消耗白银即可在指定落点呼叫一座哨戒炮塔。</Helldivers_CommsConsole.description>
+
+  <!-- 便携战略呼叫器 -->
+  <Helldivers_StratagemBeacon.label>战略呼叫器</Helldivers_StratagemBeacon.label>
+  <Helldivers_StratagemBeacon.description>手持式战略呼叫终端。装备在副手即可随时从轨道呼叫哨戒炮塔，永不耗尽。</Helldivers_StratagemBeacon.description>
+
+  <!-- 哨戒迫击炮炮塔（玩家呼叫的"超级炮台"） -->
+  <Helldivers_MortarSentry.label>超级炮台</Helldivers_MortarSentry.label>
+  <Helldivers_MortarSentry.description>由超级地球轨道空投的一次性自动瞄准迫击炮炮塔。自带内部弹药，打空后自毁并分解为废料。</Helldivers_MortarSentry.description>
+
+  <!-- 炮管与动词标签 -->
+  <Helldivers_Gun_SentryMortar.label>哨戒迫击炮管</Helldivers_Gun_SentryMortar.label>
+  <Helldivers_Gun_SentryMortar.verbs.0.verbProps.defaultLabel>哨戒迫击炮</Helldivers_Gun_SentryMortar.verbs.0.verbProps.defaultLabel>
+
+  <!-- 迫击炮弹 -->
+  <Helldivers_Proj_SentryMortarShell.label>哨戒迫击炮弹</Helldivers_Proj_SentryMortarShell.label>
+
+  <!-- 落点光柱（Mote，无 label，保留不动） -->
+
+  <!-- 治疗针 -->
+  <Helldivers_Stim.label>治疗针</Helldivers_Stim.label>
+  <Helldivers_Stim.description>绝地潜兵专用一次性战斗兴奋剂，一针下去立刻生龙活虎。</Helldivers_Stim.description>
+
+  <!-- 补给口粮 -->
+  <Helldivers_RationBar.label>补给口粮</Helldivers_RationBar.label>
+  <Helldivers_RationBar.description>发给每位绝地潜兵的高能压缩口粮，尝起来像纯粹的自由。</Helldivers_RationBar.description>
+
+  <!-- 勘测样本 -->
+  <Helldivers_Sample.label>勘测样本</Helldivers_Sample.label>
+  <Helldivers_Sample.description>机密生物样本，对超级地球未来的研究项目价值不菲，可在野外采集。</Helldivers_Sample.description>
+</LanguageData>

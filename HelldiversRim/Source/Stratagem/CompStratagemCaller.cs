@@ -28,7 +28,7 @@ namespace HelldiversRim
     /// <summary>
     /// 持续型便携呼叫器（副手装备）。携带者（玩家殖民者）会获得一个"呼叫战备"Gizmo，
     /// 选点后不消耗地呼叫一座哨戒炮塔。装备占副手槽（equipmentType=Secondary），
-    /// 不影响主武器。呼叫统一走 HelldiversCommsUtility.CallInTurret。
+    /// 不影响主武器。所有 UI 文案走 Keyed 翻译（中英文双语）。
     /// </summary>
     public class CompStratagemCaller : ThingComp
     {
@@ -39,7 +39,6 @@ namespace HelldiversRim
             foreach (Gizmo g in base.CompGetGizmosExtra())
                 yield return g;
 
-            // 只有被玩家携带的使用员身上才显示呼叫 Gizmo。
             Pawn pawn = parent.ParentHolder as Pawn;
             if (pawn == null || !pawn.RaceProps.Humanlike || pawn.Faction != Faction.OfPlayer)
                 yield break;
@@ -48,8 +47,8 @@ namespace HelldiversRim
 
             Command_Action cmd = new Command_Action
             {
-                defaultLabel = "呼叫战备：" + Props.mortarSentryDef.label,
-                defaultDesc = "不消耗地呼叫一座 " + Props.mortarSentryDef.label + " 空投到指定落点。",
+                defaultLabel = "Helldivers_CallInLabel".Translate(Props.mortarSentryDef.label).RawText,
+                defaultDesc = "Helldivers_CallerDesc".Translate(Props.mortarSentryDef.label).RawText,
                 action = BeginCallIn
             };
 
@@ -81,7 +80,7 @@ namespace HelldiversRim
 
             if (Props.silverCost > 0 && !HelldiversCommsUtility.TrySpendSilver(map, Props.silverCost))
             {
-                Messages.Message("白银不足，无法呼叫战备。", MessageTypeDefOf.RejectInput, false);
+                Messages.Message("Helldivers_SilverInsufficient".Translate().RawText, MessageTypeDefOf.RejectInput, false);
                 return;
             }
 

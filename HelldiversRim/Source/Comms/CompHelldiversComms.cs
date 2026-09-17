@@ -27,6 +27,7 @@ namespace HelldiversRim
 
     /// <summary>
     /// 挂在通讯终端建筑上：提供一个"呼叫战备"Gizmo，选择落点后扣除白银并空投炮塔。
+    /// 所有 UI 文案走 Keyed 翻译（中英文双语）。
     /// </summary>
     public class CompHelldiversComms : ThingComp
     {
@@ -44,21 +45,23 @@ namespace HelldiversRim
 
             Command_Action cmd = new Command_Action
             {
-                defaultLabel = "呼叫战备：" + Props.turretDef.label,
-                defaultDesc = (SOS2Compat.IsActive ? "经由在轨飞船空投" : "花费 " + Props.silverCost + " 白银，")
-                    + "在指定落点呼叫一座 " + Props.turretDef.label + "。",
+                defaultLabel = "Helldivers_CallInLabel".Translate(Props.turretDef.label).RawText,
+                defaultDesc = (SOS2Compat.IsActive
+                    ? "Helldivers_CommsDescOrbital".Translate(Props.turretDef.label)
+                    : "Helldivers_CommsDescCost".Translate(Props.silverCost, Props.turretDef.label)).RawText,
                 action = BeginCallIn
             };
 
             // 研究门槛
             bool researchOk = Props.researchRequired == null || Props.researchRequired.IsFinished;
             if (!researchOk)
-                cmd.Disable("需要研究：" + (Props.researchRequired?.label ?? "未知"));
+                cmd.Disable("Helldivers_ResearchRequired".Translate(
+                    Props.researchRequired?.label ?? "Helldivers_Unknown".Translate().RawText).RawText);
 
             // 电力门槛（若建筑配置了 CompPowerTrader）
             CompPowerTrader power = parent.TryGetComp<CompPowerTrader>();
             if (power != null && !power.PowerOn)
-                cmd.Disable("需要电力");
+                cmd.Disable("Helldivers_PowerRequired".Translate().RawText);
 
             yield return cmd;
         }
@@ -85,7 +88,7 @@ namespace HelldiversRim
             if (map == null)
                 return;
 
-            // SOS2：装有 SOS2 且确认在轨飞船时走轨道空投（框架；判定点留待实机核）。
+            // SOS2：装有 SOS2 且确认在轨飞船时走轨道空投。
             bool? ship = SOS2Compat.PlayerHasOrbitalShip();
             if (ship == true)
             {
@@ -95,7 +98,7 @@ namespace HelldiversRim
 
             if (!HelldiversCommsUtility.TrySpendSilver(map, Props.silverCost))
             {
-                Messages.Message("白银不足，无法呼叫战备。", MessageTypeDefOf.RejectInput, false);
+                Messages.Message("Helldivers_SilverInsufficient".Translate().RawText, MessageTypeDefOf.RejectInput, false);
                 return;
             }
 

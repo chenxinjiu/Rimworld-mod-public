@@ -1,10 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
+  <!-- ==================== Helldivers 独立研究 Tab ==================== -->
+  <!--
+    在原版研究面板里为本 mod 开一条独立科技线，避免"轨道哨戒战术"混进 Main 标签。
+    做法：定义 ResearchTabDef，然后在对应 ResearchProjectDef 里写 <tab>Helldivers</tab>。
+  -->
+  <ResearchTabDef>
+    <defName>Helldivers</defName>
+    <label>Helldivers</label>
+    <generalTitle>Helldivers research projects</generalTitle>
+    <generalDescription>Super Earth authorized technologies. Establish orbital support, orbital sentries, and stratagem equipment.</generalDescription>
+  </ResearchTabDef>
+
   <ResearchProjectDef>
     <defName>Helldivers_OrbitalSentryTactics</defName>
     <label>orbital sentry tactics</label>
     <description>Establish a secure uplink with Super Earth command, allowing you to call in sentry turrets from orbit via the comms terminal or stratagem beacon.</description>
+    <tab>Helldivers</tab>
     <canRequestAnyThing>true</canRequestAnyThing>
     <techLevel>Industrial</techLevel>
     <baseCost>1800</baseCost>

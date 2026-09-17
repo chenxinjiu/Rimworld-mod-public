@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <Helldivers_CallInLabel>呼叫战备：{0}</Helldivers_CallInLabel>
+  <Helldivers_CommsDescOrbital>通过在轨飞船空投呼叫一座{0}。</Helldivers_CommsDescOrbital>
+  <Helldivers_CommsDescCost>消耗{0}白银，在指定落点呼叫一座{1}。</Helldivers_CommsDescCost>
+  <Helldivers_CallerDesc>不消耗地在指定落点呼叫一座{0}。</Helldivers_CallerDesc>
+  <Helldivers_ResearchRequired>需要研究：{0}</Helldivers_ResearchRequired>
+  <Helldivers_PowerRequired>需要电力</Helldivers_PowerRequired>
+  <Helldivers_SilverInsufficient>白银不足，无法呼叫战备。</Helldivers_SilverInsufficient>
+  <Helldivers_Unknown>未知</Helldivers_Unknown>
+</LanguageData>
