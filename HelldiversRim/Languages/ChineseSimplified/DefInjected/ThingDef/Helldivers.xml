@@ -8,22 +8,22 @@
   <Helldivers_StratagemBeacon.label>战略呼叫器</Helldivers_StratagemBeacon.label>
   <Helldivers_StratagemBeacon.description>手持式战略呼叫终端。装备在副手即可随时从轨道呼叫哨戒炮塔，永不耗尽。</Helldivers_StratagemBeacon.description>
 
-  <!-- 哨戒迫击炮炮塔（玩家呼叫的"超级炮台"） -->
+  <!-- 哨戒迫击炮炮塔 -->
   <Helldivers_MortarSentry.label>超级炮台</Helldivers_MortarSentry.label>
   <Helldivers_MortarSentry.description>由超级地球轨道空投的一次性自动瞄准迫击炮炮塔。自带内部弹药，打空后自毁并分解为废料。</Helldivers_MortarSentry.description>
 
-  <!-- 炮管与动词标签 -->
+  <!-- 炮管 -->
   <Helldivers_Gun_SentryMortar.label>哨戒迫击炮管</Helldivers_Gun_SentryMortar.label>
   <Helldivers_Gun_SentryMortar.verbs.0.verbProps.defaultLabel>哨戒迫击炮</Helldivers_Gun_SentryMortar.verbs.0.verbProps.defaultLabel>
 
   <!-- 迫击炮弹 -->
   <Helldivers_Proj_SentryMortarShell.label>哨戒迫击炮弹</Helldivers_Proj_SentryMortarShell.label>
 
-  <!-- 落点光柱（Mote，无 label，保留不动） -->
-
-  <!-- 治疗针 -->
-  <Helldivers_Stim.label>治疗针</Helldivers_Stim.label>
-  <Helldivers_Stim.description>绝地潜兵专用一次性战斗兴奋剂，一针下去立刻生龙活虎。</Helldivers_Stim.description>
+  <!-- 战斗兴奋剂（改为成瘾品） -->
+  <Helldivers_Stim.label>战斗兴奋剂</Helldivers_Stim.label>
+  <Helldivers_Stim.description>超级地球战斗兴奋剂。一针下去立刻清除所有伤口、恢复断肢、满血复活，并在一天内超级强化反射神经。但会形成严重化学依赖——不按时注射后果致命。</Helldivers_Stim.description>
+  <Helldivers_Stim.ingestible.ingestCommandString>注射{0}</Helldivers_Stim.ingestible.ingestCommandString>
+  <Helldivers_Stim.ingestible.ingestReportString>正在注射{0}。</Helldivers_Stim.ingestible.ingestReportString>
 
   <!-- 补给口粮 -->
   <Helldivers_RationBar.label>补给口粮</Helldivers_RationBar.label>

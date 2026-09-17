@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ==================== Stim High（战斗兴奋剂高潮） ==================== -->
+  <HediffDef>
+    <defName>Helldivers_StimHigh</defName>
+    <hediffClass>Hediff_High</hediffClass>
+    <label>combat stim high</label>
+    <labelNoun>a combat stim high</labelNoun>
+    <description>Supercharged combat reflexes from a Helldiver stim. Shooting speed and accuracy are doubled, weapon handling is drastically faster. Wounds regenerate rapidly for the first eight hours.</description>
+    <defaultLabelColor>(1,0,0.5)</defaultLabelColor>
+    <maxSeverity>1.0</maxSeverity>
+    <isBad>false</isBad>
+    <comps>
+      <!-- 持续 1 游戏天（severity 从 1.0 降到 0） -->
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>-1.0</severityPerDay>
+        <showHoursToRecover>true</showHoursToRecover>
+      </li>
+      <!-- 立即效果：清流血/断肢/满血 + 重置依赖计时 -->
+      <li Class="HelldiversRim.HediffCompProperties_StimEffect"/>
+      <!-- 8 小时内持续回血 -->
+      <li Class="HelldiversRim.HediffCompProperties_StimRegen"/>
+    </comps>
+    <stages>
+      <li>
+        <statOffsets>
+          <!-- 射击精度 +200% -->
+          <ShootingAccuracyPawn>20</ShootingAccuracyPawn>
+          <!-- 射击冷却降至 50%（= 射速 200%） -->
+          <RangedCooldownFactor>-0.5</RangedCooldownFactor>
+          <!-- 瞄准延迟降至 10%（= 换弹/武器操作速度 10 倍） -->
+          <AimingDelayFactor>-0.9</AimingDelayFactor>
+        </statOffsets>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- ==================== Stim Addiction（兴奋剂依赖） ==================== -->
+  <!--
+    依赖机制：severity 从 0 每天增加 1/60（60 天到满）。
+    用了一次兴奋剂 → severity 重置为 0。
+    3 天 (severity 0.05) → 意识降至 50%
+    30 天 (severity 0.50) → 无法行动
+    60 天 (severity 1.00) → 致死
+  -->
+  <HediffDef>
+    <defName>Helldivers_StimAddiction</defName>
+    <label>stim dependency</label>
+    <labelNoun>a stim dependency</labelNoun>
+    <description>A severe chemical dependency created by the Helldiver combat stim. The body now requires regular doses to function normally. Missing a dose for three days halves consciousness. After thirty days the body paralyses. After sixty days, death.</description>
+    <maxSeverity>1.0</maxSeverity>
+    <lethalSeverity>1.0</lethalSeverity>
+    <isBad>true</isBad>
+    <comps>
+      <li Class="HediffCompProperties_SeverityPerDay">
+        <severityPerDay>0.01667</severityPerDay>
+        <showDaysToRecover>false</showDaysToRecover>
+      </li>
+    </comps>
+    <stages>
+      <!-- 0 ~ 0.05：无症状（3 天宽限） -->
+      <li>
+        <becomeVisible>false</becomeVisible>
+      </li>
+      <!-- 0.05 ~ 0.50：意识 50%（3~30 天） -->
+      <li>
+        <minSeverity>0.05</minSeverity>
+        <label>early withdrawal</label>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.5</offset>
+          </li>
+        </capMods>
+      </li>
+      <!-- 0.50 ~ 1.0：无法行动（30~60 天） -->
+      <li>
+        <minSeverity>0.50</minSeverity>
+        <label>severe withdrawal</label>
+        <capMods>
+          <li>
+            <capacity>Consciousness</capacity>
+            <offset>-0.5</offset>
+          </li>
+          <li>
+            <capacity>Moving</capacity>
+            <setMax>0.0</setMax>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+</Defs>

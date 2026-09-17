@@ -1,29 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Defs>
 
-  <!-- ==================== Stim（治疗针） ==================== -->
+  <!-- ==================== Stim（战斗兴奋剂 / 成瘾品） ==================== -->
   <ThingDef>
     <defName>Helldivers_Stim</defName>
-    <label>stim</label>
-    <description>A single-use Helldiver combat stim. One press of the trigger and you're back on your feet, fighting fit again.</description>
+    <label>combat stim</label>
+    <description>A potent Helldiver combat stim. One injection instantly clears all wounds, restores missing limbs, and supercharges reflexes for a full day. However, it creates a severe chemical dependency — miss a dose and suffer the consequences.</description>
     <category>Item</category>
-    <thingClass>Thing_Medicine</thingClass>
+    <thingClass>Thing_Ingestible</thingClass>
     <eType>Item</eType>
     <healthAffectsPrice>false</healthAffectsPrice>
     <statBases>
       <MaxHitPoints>100</MaxHitPoints>
-      <MarketValue>45</MarketValue>
+      <MarketValue>120</MarketValue>
+      <Mass>0.05</Mass>
+      <Flammability>0.5</Flammability>
+      <DeteriorationRate>0</DeteriorationRate>
     </statBases>
     <graphicData>
       <texPath>Things/Item/Resource/Pharmaceuticals/Medicine/MedicineIndustrial</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
+      <graphicClass>Graphic_StackCount</graphicClass>
       <drawGUIOverlay>true</drawGUIOverlay>
     </graphicData>
     <altitudeLayer>Item</altitudeLayer>
-    <stackLimit>1</stackLimit>
+    <stackLimit>6</stackLimit>
     <rotatable>false</rotatable>
-    <medicineCategory>Medicine</medicineCategory>
-    <tendingPriority>5</tendingPriority>
+    <techLevel>Spacer</techLevel>
+    <thingCategories>
+      <li>Items</li>
+    </thingCategories>
+    <ingestible>
+      <drugCategory>Hard</drugCategory>
+      <foodType>Processed, Fluid</foodType>
+      <baseIngestTicks>80</baseIngestTicks>
+      <ingestSound>Ingest_Inject</ingestSound>
+      <ingestCommandString>Inject {0}</ingestCommandString>
+      <ingestReportString>Injecting {0}.</ingestReportString>
+      <useEatingSpeedStat>false</useEatingSpeedStat>
+      <chairSearchRadius>0</chairSearchRadius>
+      <outcomeDoers>
+        <li Class="IngestionOutcomeDoer_GiveHediff">
+          <hediffDef>Helldivers_StimHigh</hediffDef>
+          <severity>1.0</severity>
+        </li>
+      </outcomeDoers>
+    </ingestible>
   </ThingDef>
 
   <!-- ==================== Ration Bar（补给口粮） ==================== -->

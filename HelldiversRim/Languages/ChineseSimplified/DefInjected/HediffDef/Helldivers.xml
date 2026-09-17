@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <Helldivers_StimHigh.label>战斗兴奋剂</Helldivers_StimHigh.label>
+  <Helldivers_StimHigh.labelNoun>一剂战斗兴奋剂效果</Helldivers_StimHigh.labelNoun>
+  <Helldivers_StimHigh.description>超级地球战斗兴奋剂带来的超级战斗状态。射击速度和精度翻倍，武器操控极快。前八小时内伤口快速愈合。</Helldivers_StimHigh.description>
+
+  <Helldivers_StimAddiction.label>兴奋剂依赖</Helldivers_StimAddiction.label>
+  <Helldivers_StimAddiction.labelNoun>一种兴奋剂依赖</Helldivers_StimAddiction.labelNoun>
+  <Helldivers_StimAddiction.description>超级地球战斗兴奋剂造成的严重化学依赖。身体需要定期注射才能正常运作。停药三天意识减半；三十天后全身瘫痪；六十天后死亡。</Helldivers_StimAddiction.description>
+
+  <Helldivers_StimAddiction.stages.1.label>早期戒断</Helldivers_StimAddiction.stages.1.label>
+  <Helldivers_StimAddiction.stages.2.label>严重戒断</Helldivers_StimAddiction.stages.2.label>
+</LanguageData>
