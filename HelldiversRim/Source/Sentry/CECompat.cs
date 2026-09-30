@@ -48,12 +48,10 @@ namespace HelldiversRim
 
             foreach (string candidate in new[] { "CurMag", "MagAmmoCount", "AmmoCount" })
             {
-                PropertyInfo pi = t.GetProperty(candidate, flags);
-                if (pi != null && pi.PropertyType == typeof(int))
+                if (t.GetProperty(candidate, flags) is PropertyInfo pi && pi.PropertyType == typeof(int))
                     return (int)pi.GetValue(ceComp);
 
-                FieldInfo fi = t.GetField(candidate, flags);
-                if (fi != null && fi.FieldType == typeof(int))
+                if (t.GetField(candidate, flags) is FieldInfo fi && fi.FieldType == typeof(int))
                     return (int)fi.GetValue(ceComp);
             }
 

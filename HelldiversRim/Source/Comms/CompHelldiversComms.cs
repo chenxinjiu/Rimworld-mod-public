@@ -88,21 +88,19 @@ namespace HelldiversRim
             if (map == null)
                 return;
 
-            // SOS2：装有 SOS2 且确认在轨飞船时走轨道空投。
-            bool? ship = SOS2Compat.PlayerHasOrbitalShip();
-            if (ship == true)
+            // SOS2：装有 SOS2 且确认在轨飞船时直接空投（免白银）。
+            if (SOS2Compat.PlayerHasOrbitalShip() == true)
             {
-                SOS2Compat.TryOrbitalDrop(target.Cell, map, Props.turretDef, Props.pillarDef);
+                HelldiversCommsUtility.CallInTurret(target.Cell, map, Props.turretDef, Props.pillarDef);
                 return;
             }
 
-            if (!HelldiversCommsUtility.TrySpendSilver(map, Props.silverCost))
-            {
-                Messages.Message("Helldivers_SilverInsufficient".Translate().RawText, MessageTypeDefOf.RejectInput, false);
-                return;
-            }
-
-            HelldiversCommsUtility.CallInTurret(target.Cell, map, Props.turretDef, Props.pillarDef);
+            HelldiversCommsUtility.TrySpendSilverAndCallIn(
+                map,
+                target.Cell,
+                Props.turretDef,
+                Props.pillarDef,
+                Props.silverCost);
         }
     }
 }

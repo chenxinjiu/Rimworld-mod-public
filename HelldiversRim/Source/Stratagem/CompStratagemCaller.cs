@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using RimWorld;
 using Verse;
 
@@ -74,21 +73,12 @@ namespace HelldiversRim
 
         private void OnTargetSelected(LocalTargetInfo target)
         {
-            Map map = parent.Map;
-            if (map == null)
-                return;
-
-            if (Props.silverCost > 0 && !HelldiversCommsUtility.TrySpendSilver(map, Props.silverCost))
-            {
-                Messages.Message("Helldivers_SilverInsufficient".Translate().RawText, MessageTypeDefOf.RejectInput, false);
-                return;
-            }
-
-            HelldiversCommsUtility.CallInTurret(
+            HelldiversCommsUtility.TrySpendSilverAndCallIn(
+                parent.Map,
                 target.Cell,
-                map,
                 Props.mortarSentryDef,
                 Props.beaconPillarDef,
+                Props.silverCost,
                 Props.podOpenDelay);
         }
     }

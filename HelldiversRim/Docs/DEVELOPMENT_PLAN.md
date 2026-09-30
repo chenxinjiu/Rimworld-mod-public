@@ -19,7 +19,7 @@
 | Phase 0 | 骨架：消耗品 + 一次性迫击炮 + 信标/光柱 + CE 补丁框架 + 软依赖层 | 完成（代码），待实机测 |
 | Phase 1 | 通讯终端呼叫 + 派系结盟 + 科技解锁 | 完成（代码），待实机测 |
 | Phase 2 | 升级模块（弹药/血量档位） | 暂缓（按架构约定） |
-| Phase 3 | SOS2 轨道空投 | 占位（API 未接） |
+| Phase 3 | SOS2 轨道空投 | 框架已实现（判定逻辑已写，未实机验证） |
 | Phase 4 | 炮台补全 + 美术 + 平衡 | 缺口最大 |
 | Phase 5 | 文案 / lore | 尚未开始 |
 
@@ -31,8 +31,7 @@
 
 ### A. 必做的事（未做就出问题）
 
-- [ ] **`About/LoadFolders.xml` 缺 `<v1.6>` 条目**（当前只有 v1.4 / v1.5）。
-     1.6 下 mod 可能不加载或加载异常 —— **高优先级，应立刻补**：`<v1.6><li>/</li></v1.6>`。
+- [x] ~~**`About/LoadFolders.xml` 缺 `<v1.6>` 条目**~~ —— **已补**（现含 v1.4 / v1.5 / v1.6 三条），1.6 加载风险已消除。
 - [ ] **整体实机验证**：编译通过不等于运行正常。核心链路一次都还没在游戏里跑通。
 - [ ] **派系图标缺失**：`Helldivers_SuperEarth` 没配 `factionIconPath`，游戏 UI 里派系会缺图标。
 
@@ -68,9 +67,9 @@
 
 | 位置 | 占位内容 | 说明 |
 |---|---|---|
-| SOS2Compat.cs 的 PlayerHasOrbitalShip | 恒 return false（TODO） | SOS2 在轨飞船判定**未实现**，先回落通讯终端路径 |
-| CECompat.cs 的 AmmoRemaining | 反射探测 4 个候选字段名 | CE 版本差异，探测不到会安全降级 |
-| Patches/Helldivers_CE_Patch.xml | Verb_ShootCE / ProjectileCE_Explosive / ammoSet=CE_Autocannon_Round | **起点版**，值需按你的 CE 版本核对 |
+| SOS2Compat.cs 的 PlayerHasOrbitalShip | **已实现**（遍历世界对象匹配 `defName=ShipOrbiting` + 玩家派系三态判定） | ⚠️ 非空壳，但**未在装 SOS2 的实机验证**；包名 `kentington.saveourship2` 与判定逻辑待实机确认 |
+| CECompat.cs 的 AmmoRemaining | 反射探测 3 个候选字段名（CurMag / MagAmmoCount / AmmoCount） | CE 版本差异，探测不到会安全降级并告警一次 |
+| Patches/Helldivers_CE_Patch.xml | Verb_ShootCE / Helldivers_Proj_CEMortarShell / ammoSet=AmmoSet_MortarGrenade | **起点版**，值需按你的 CE 版本核对 |
 | CompSentryLifespan.cs | 数值硬编码（shots/explodeRadius/scrapCount） | 应抽成上述可配置模型 |
 
 ---
@@ -96,10 +95,10 @@
 
 ## 6. 下一步执行计划（建议顺序）
 
-1. **修 LoadFolders.xml 补 v1.6**（最小改动，消除 1.6 加载风险）。
+1. ~~**修 LoadFolders.xml 补 v1.6**~~ —— **已完成**（v1.6 条目已存在）。
 2. **实机验证核心链路**：空投落地→索敌开火→弹尽自毁→分解回钢；通讯终端扣白银；派系结盟。
 3. **补派系图标 + 至少自绘一款炮台贴图**，把最占位的视觉效果替换掉。
-4. 核对并**合并两笔重复研究科技**。
+4. ~~核对并**合并两笔重复研究科技**~~ —— **已完成**（统一为 `Helldivers_OrbitalSentryTactics`）。
 5. 抽样核对 CE 补丁值 / 补 SOS2 在轨判定（配合实机）。
 6. Phase 4 数值平衡与更多炮台类型（按需）。
 

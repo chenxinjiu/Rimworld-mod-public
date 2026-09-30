@@ -29,7 +29,7 @@ Super-Earth（绝地潜兵）风格的内容mod，计划包含：
 | 通讯终端呼叫 | `Helldivers_CommsConsole` + 白银扣费 + 落点瞄准 | ✅ |
 | 固定盟友派系 | Super Earth(`Helldivers_SuperEarth`) + 开局强制结盟 | ✅ |
 | 科技解锁 | `Helldivers_OrbitalSentryTactics` 门控呼叫 | ✅ |
-| SOS2 空投框架 | `SOS2Compat` 软依赖适配 + 轨道空投入口 | 🚧 框架已搭，API待实机核 |
+| SOS2 空投框架 | `SOS2Compat` 软依赖适配 + 在轨飞船三态判定 | 🚧 逻辑已实现，待实机核 |
 | CE 兼容 | PatchOperationFindMod 门控 + C# 反射软依赖(CECompat) | ⚠️ 起点版，需实机验证 |
 
 ---
@@ -100,7 +100,7 @@ Turret 配置（每座炮台一组）：
   通讯终端升级各炮台弹药量/血量（暂缓，见 §3.3）。
 
 - **Phase 3 —— SOS2 飞船空投（进行中）**
-  软依赖适配层 `SOS2Compat` + 轨道空投入口已搭（框架）；需按 SOS2 实际 API 补"玩家在轨飞船"判定后实装。保留通讯终端呼叫。
+  软依赖适配层 `SOS2Compat` 已实现"玩家在轨飞船"三态判定（遍历世界对象匹配 `ShipOrbiting` + 玩家派系）；判定通过则走轨道空投，否则回落通讯终端呼叫。**待实机验证**。
 
 - **Phase 4 —— 炮台补全 + 美术 + 平衡**
   机枪/加特林/自动加农等哨戒；替换用户素材；数值按 HD2 数据平衡。
@@ -140,4 +140,4 @@ Turret 配置（每座炮台一组）：
 - [ ] `Find.Targeter.BeginTargeting` 四参重载、`map.listerThings.AllThings`、`FactionGenerator.NewGeneratedFaction`。
 - [ ] `ResearchProjectDef.IsFinished`、`CompPowerTrader.PowerOn`、`Command_Action.Disable`。
 - [ ] CE 补丁字段与 Def 名（按你 CE 版本）。
-- [ ] SOS2：`kentington.SaveOurShip2` 包名与"玩家在轨飞船"API（框架已留 TODO）。
+- [ ] SOS2：`kentington.saveourship2` 包名与"玩家在轨飞船"判定逻辑（**已实现，待实机核对**）。

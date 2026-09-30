@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using RimWorld;
@@ -30,33 +31,19 @@ namespace HelldiversRim
             Pawn pawn = Pawn;
             if (pawn?.health == null) return;
 
-            // 1) 清除流血
-            var bloodLoss = pawn.health.hediffSet.hediffs
-                .Where(h => h.def == HediffDefOf.BloodLoss)
-                .ToList();
-            foreach (var h in bloodLoss)
-                pawn.health.RemoveHediff(h);
-
-            // 2) 恢复断肢（移除 MissingPart）
-            var missingParts = pawn.health.hediffSet.hediffs
-                .Where(h => h is Hediff_MissingPart)
-                .ToList();
-            foreach (var h in missingParts)
-                pawn.health.RemoveHediff(h);
-
-            // 3) 清除所有伤口
-            var injuries = pawn.health.hediffSet.hediffs
-                .Where(h => h is Hediff_Injury)
-                .ToList();
-            foreach (var h in injuries)
-                pawn.health.RemoveHediff(h);
+            // 1-3) 清除流血 / 断肢 / 所有伤口
+            RemoveHediffs(pawn,
+                h => h.def == HediffDefOf.BloodLoss,
+                h => h is Hediff_MissingPart,
+                h => h is Hediff_Injury);
 
             // 4) 重置依赖：没有就添加，有就清零
+            const string addictionDefName = "Helldivers_StimAddiction";
             Hediff addiction = pawn.health.hediffSet.hediffs
-                .FirstOrDefault(h => h.def.defName == "Helldivers_StimAddiction");
+                .FirstOrDefault(h => h.def.defName == addictionDefName);
             if (addiction == null)
             {
-                HediffDef addictDef = DefDatabase<HediffDef>.GetNamedSilentFail("Helldivers_StimAddiction");
+                HediffDef addictDef = DefDatabase<HediffDef>.GetNamedSilentFail(addictionDefName);
                 if (addictDef != null)
                 {
                     addiction = HediffMaker.MakeHediff(addictDef, pawn);
@@ -68,6 +55,15 @@ namespace HelldiversRim
             {
                 addiction.Severity = 0f;
             }
+        }
+
+        private static void RemoveHediffs(Pawn pawn, params Func<Hediff, bool>[] predicates)
+        {
+            var toRemove = pawn.health.hediffSet.hediffs
+                .Where(h => predicates.Any(p => p(h)))
+                .ToList();
+            foreach (var h in toRemove)
+                pawn.health.RemoveHediff(h);
         }
     }
 
@@ -98,19 +94,17 @@ namespace HelldiversRim
             if (pawn?.health == null) return;
 
             // 找到最严重的伤口并治疗
-            var injuries = pawn.health.hediffSet.hediffs
+            Hediff_Injury worst = pawn.health.hediffSet.hediffs
                 .OfType<Hediff_Injury>()
                 .Where(i => i.Severity > 0f)
-                .ToList();
+                .OrderByDescending(i => i.Severity)
+                .FirstOrDefault();
+            if (worst == null) return;
 
-            if (injuries.Count > 0)
-            {
-                var worst = injuries.OrderByDescending(i => i.Severity).First();
-                // 每 tick 恢复 ~0.02 严重度（约 1% 血量）
-                worst.Severity -= 0.02f;
-                if (worst.Severity <= 0f)
-                    pawn.health.RemoveHediff(worst);
-            }
+            // 每 tick 恢复 ~0.02 严重度（约 1% 血量）
+            worst.Severity -= 0.02f;
+            if (worst.Severity <= 0f)
+                pawn.health.RemoveHediff(worst);
         }
     }
 }

@@ -64,5 +64,21 @@ namespace HelldiversRim
 
             return remaining <= 0;
         }
+
+        /// <summary>
+        /// 供通讯终端 / 便携呼叫器等共用的完整呼叫流程：扣白银 → 生成光柱 → 空投炮塔。
+        /// silverCost 为 0 时视为免费；返回是否成功（白银不足时返回 false 且不召唤）。
+        /// </summary>
+        public static bool TrySpendSilverAndCallIn(Map map, IntVec3 cell, ThingDef turretDef, ThingDef pillarDef, int silverCost, int openDelay = 60)
+        {
+            if (silverCost > 0 && !TrySpendSilver(map, silverCost))
+            {
+                Messages.Message("Helldivers_SilverInsufficient".Translate().RawText, MessageTypeDefOf.RejectInput, false);
+                return false;
+            }
+
+            CallInTurret(cell, map, turretDef, pillarDef, openDelay);
+            return true;
+        }
     }
 }

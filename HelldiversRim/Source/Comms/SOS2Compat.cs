@@ -35,16 +35,6 @@ namespace HelldiversRim
 
         public static bool IsActive => active == true;
 
-        /// <summary>从在轨飞船向落点空投炮台（当前实现复用统一呼叫入口）。</summary>
-        public static bool TryOrbitalDrop(IntVec3 cell, Map map, ThingDef turretDef, ThingDef pillarDef, int openDelay = 60)
-        {
-            if (!IsActive)
-                return false;
-
-            HelldiversCommsUtility.CallInTurret(cell, map, turretDef, pillarDef, openDelay);
-            return true;
-        }
-
         /// <summary>
         /// 玩家阵营是否拥有一艘在轨飞船（SOS2）。三态：
         ///   null → 未安装 SOS2（主调方应走"无轨道支援"的回落路径）；
