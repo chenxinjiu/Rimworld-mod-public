@@ -14,17 +14,45 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <!-- 1.7 Waylith 布局：所有程序集平铺在游戏根目录 -->
-    <RimWorldPath Condition="'$(RimWorldPath)' == ''">C:\Program Files (x86)\Steam\steamapps\common\RimWorld</RimWorldPath>
+    <!-- 游戏路径：按 Exists 依次探测常见安装位置，换机器可用 -p:RimWorldPath=... 覆盖 -->
+    <RimWorldPath Condition="'$(RimWorldPath)' == '' AND Exists('E:\steam\steamapps\common\RimWorld')">E:\steam\steamapps\common\RimWorld</RimWorldPath>
+    <RimWorldPath Condition="'$(RimWorldPath)' == '' AND Exists('C:\Program Files (x86)\Steam\steamapps\common\RimWorld')">C:\Program Files (x86)\Steam\steamapps\common\RimWorld</RimWorldPath>
+
+    <!-- 布局探测：1.7 Waylith 把程序集平铺在游戏根目录（含 UnityStubs.dll）；
+         1.6 及以前在 RimWorldWin64_Data\Managed。两种布局都支持，编译同一份源码。 -->
+    <UseWaylithLayout Condition="'$(UseWaylithLayout)' == '' AND Exists('$(RimWorldPath)\UnityStubs.dll')">true</UseWaylithLayout>
+    <UseWaylithLayout Condition="'$(UseWaylithLayout)' == ''">false</UseWaylithLayout>
+    <RimWorldManagedDir Condition="'$(RimWorldManagedDir)' == ''">$(RimWorldPath)\RimWorldWin64_Data\Managed</RimWorldManagedDir>
   </PropertyGroup>
 
-  <ItemGroup>
+  <Target Name="ReportLayout" BeforeTargets="Build">
+    <Message Importance="high" Text="HelldiversRim: RimWorldPath=$(RimWorldPath) | Waylith(1.7)布局=$(UseWaylithLayout)" />
+  </Target>
+
+  <!-- 1.7+ Waylith 布局 -->
+  <ItemGroup Condition="'$(UseWaylithLayout)' == 'true'">
     <Reference Include="Assembly-CSharp">
       <HintPath>$(RimWorldPath)\Assembly-CSharp.dll</HintPath>
       <Private>false</Private>
     </Reference>
     <Reference Include="UnityStubs">
       <HintPath>$(RimWorldPath)\UnityStubs.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+  </ItemGroup>
+
+  <!-- 1.6 及以前的老布局 -->
+  <ItemGroup Condition="'$(UseWaylithLayout)' != 'true'">
+    <Reference Include="Assembly-CSharp">
+      <HintPath>$(RimWorldManagedDir)\Assembly-CSharp.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine">
+      <HintPath>$(RimWorldManagedDir)\UnityEngine.dll</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(RimWorldManagedDir)\UnityEngine.CoreModule.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>

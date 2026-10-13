@@ -147,6 +147,28 @@ dotnet build "D:\rimworld\-cheng-RimWorld\MilliraSpecialCharacter\Source\Millira
 
 ---
 
+## 七、补充（本机追记）：csproj 改为 1.6 / 1.7 双布局自适应
+
+第二节 A1 的修法把 csproj 固定成了 1.7 Waylith 单一布局（`$(RimWorldPath)\Assembly-CSharp.dll` + `UnityStubs.dll`），
+在 1.6 老布局机器（`E:\steam\...`，程序集仍在 `RimWorldWin64_Data\Managed`）上编译会**全量 CS0246（实测 69 个错误）**——
+即只适配了 1.7，1.6 断掉。已改为自动探测：
+
+| 布局 | 探测条件 | 引用 |
+|------|---------|------|
+| 1.7+ Waylith | 根目录存在 `UnityStubs.dll` | `Assembly-CSharp` + `UnityStubs`（同原 A1 修法） |
+| 1.6 及以前 | 否则 | `Managed\` 下的 `Assembly-CSharp` + `UnityEngine` + `UnityEngine.CoreModule` |
+
+- `RimWorldPath` 默认按 `E:\steam\...` → `C:\Program Files (x86)\Steam\...` 依次 `Exists` 探测，两种机器都不必手工传参；仍可用 `-p:RimWorldPath=` 覆盖。
+- 构建时打印一行 `ReportLayout`，直接显示本次用的路径与布局，避免"悄悄选错布局"再撞 CS0246。
+- **源码不需要按版本分叉**：同一份 11 个 `.cs` 在两种布局下均编译通过（1.6 侧本机实测 **0 警告 0 错误**）。
+
+> **发布用 DLL 的取舍（重要，待 1.7 实机确认）**：建议发 **1.6 布局编译**的产物。
+> 1.7 的 runtimeconfig 带 `UnityEngine* → UnityStubs` 程序集重定向，引用 `UnityEngine` 的老二进制能在 1.7 加载（见第一节）；
+> 反向则不然——1.7 编译产物引用 `UnityStubs`，1.6 没有该程序集，多半加载失败。
+> 唯一例外：若 `UnityStubs.dll` 的清单程序集名恰好就是 `UnityEngine`，则两向都能加载（本机无 1.7 环境，未实测）。
+
+---
+
 ## 附录：本次验证的证据与复现方式
 
 1. **原样编译失败**（两个仓库旧 csproj 指向 `RimWorldWin64_Data\Managed`）→ 全量 CS0246（找不到 RimWorld/Verse/UnityEngine 命名空间）。
