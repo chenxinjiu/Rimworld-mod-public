@@ -14,36 +14,21 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <!--
-      改成引用本机游戏目录里的 Managed dll，不再用 NuGet 的 Krafs.Rimworld.Ref 1.5 包（与 1.6 不匹配）。
-      RimWorld 默认装在 Steam 公共库。可命令行覆盖：
-        dotnet build -p:RimWorldPath="E:\Other\SteamLibrary\..."
-
-      如果继续用 <RimWorldPath>xxx</RimWorldPath> 写死在 csproj 里，
-      请在下方改用你自己机器的真实路径。
-    -->
-    <SteamInstall Condition="'$(SteamInstall)' == ''">E:\steam</SteamInstall>
-    <RimWorldPath Condition="'$(RimWorldPath)' == ''">$(SteamInstall)\steamapps\common\RimWorld</RimWorldPath>
-    <RimWorldManaged>$(RimWorldPath)\RimWorldWin64_Data\Managed</RimWorldManaged>
+    <!-- 1.7 Waylith 布局：所有程序集平铺在游戏根目录 -->
+    <RimWorldPath Condition="'$(RimWorldPath)' == ''">C:\Program Files (x86)\Steam\steamapps\common\RimWorld</RimWorldPath>
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- 显式引用本机游戏 Managed dll（通配符 *.dll 在 Reference 上不可靠，改用 HintPath 保证解析到 Assembly-CSharp） -->
     <Reference Include="Assembly-CSharp">
-      <HintPath>$(RimWorldManaged)\Assembly-CSharp.dll</HintPath>
+      <HintPath>$(RimWorldPath)\Assembly-CSharp.dll</HintPath>
       <Private>false</Private>
     </Reference>
-    <Reference Include="UnityEngine">
-      <HintPath>$(RimWorldManaged)\UnityEngine.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="UnityEngine.CoreModule">
-      <HintPath>$(RimWorldManaged)\UnityEngine.CoreModule.dll</HintPath>
+    <Reference Include="UnityStubs">
+      <HintPath>$(RimWorldPath)\UnityStubs.dll</HintPath>
       <Private>false</Private>
     </Reference>
   </ItemGroup>
 
-  <!-- 编译后把 dll 拷进 mod 的 Assemblies 目录 -->
   <Target Name="CopyToModAssemblies" AfterTargets="Build">
     <Copy SourceFiles="$(OutputPath)HelldiversRim.dll" DestinationFolder="$(MSBuildProjectDirectory)/../Assemblies" />
   </Target>

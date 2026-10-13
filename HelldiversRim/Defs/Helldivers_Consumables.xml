@@ -81,7 +81,7 @@
     <label>prospected sample</label>
     <description>A classified biological sample, valuable for future Super-Earth research projects. Collect them from the wilds.</description>
     <category>Item</category>
-    <thingClass>Thing_Resource</thingClass>
+    <thingClass>Thing</thingClass>
     <eType>Item</eType>
     <countAsResource>true</countAsResource>
     <resourceReadoutPriority>Middle</resourceReadoutPriority>

@@ -79,7 +79,6 @@
         <scrapDef>Steel</scrapDef>
         <scrapCount>60</scrapCount>
       </li>
-      <li Class="CompToggleableOverlay"/>
     </comps>
     <costList>
       <Steel>120</Steel>
